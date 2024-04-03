@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FavoriteController;
+
+use App\Models\Anime;
 
 Route::get('/', function () {
     $cacheKey = "anime-calendar";
@@ -18,6 +21,20 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+// Route::get('/database', function () {
+//     $response = Http::get("https://api.bgm.tv/calendar")->object();
+
+//     for($i = 0; $i<7; $i++) {
+//         foreach ($response[$i]->items as $anime) {
+//             $animeObject = new Anime();
+//             $animeObject->anime_id = $anime->id;
+//             $animeObject->name = $anime->name;
+//             $animeObject->thumbnail_link = $anime->images ? $anime->images->small : null;
+//             $animeObject->save();
+//         }
+//     }
+// });
+
 Route::get('/register', [RegistrationController::class, 'index'])->name('registration.index');
 Route::post('/register', [RegistrationController::class, 'register'])->name('registration.create');
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
@@ -30,3 +47,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
+
+Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
+Route::post('/favorites/{anime_id}', [FavoriteController::class, 'store'])->name('favorites.store');
+Route::delete('/favorites/{anime_id}', [FavoriteController::class, 'delete'])->name('favorites.delete');

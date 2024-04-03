@@ -32,7 +32,12 @@
                                     </td>
                                     <td>
                                         @if (Auth::check())
-                                            Favorite
+                                            <form action="{{ route('favorites.store', ['anime_id' => $anime->id]) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Favorite
+                                                </button>
+                                            </form>
                                         @else
                                             Please log in or register.
                                         @endif

@@ -15,6 +15,9 @@
             </li>
             @if (Auth::check())
                 <li class="nav-item">
+                    <a href="/favorites" class="nav-link">Favorites</a>
+                </li>
+                <li class="nav-item">
                     <form method="post" action="{{ route('auth.logout') }}">
                         @csrf
                         <button type="submit" class="btn btn-link">Logout</button>

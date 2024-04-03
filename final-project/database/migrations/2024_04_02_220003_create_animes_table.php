@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->id();
+            $table->string("anime_id");
             $table->string('name');
-            $table->string('thumbnail_link');
+            $table->string('thumbnail_link')->nullable();
             $table->timestamps();
         });
     }
