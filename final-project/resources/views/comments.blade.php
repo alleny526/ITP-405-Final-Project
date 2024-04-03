@@ -35,7 +35,7 @@
                     </td>
                     <td>
                         @if (Auth::user()->id == $comment->user_id)
-                            <form action="{{ route('comments.update', ['comment_id' => $comment->id]) }}" method="POST">
+                            <form action="{{ route('comments.update', ['comment_id' => $comment->id, 'anime_id' => $anime->anime_id]) }}" method="POST">
                                 @csrf
                                 <textarea id="content" name="content"></textarea>
                                 <button type="submit" class="btn btn-primary">

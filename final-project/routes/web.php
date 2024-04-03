@@ -22,19 +22,19 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-    // Route::get('/database', function () {
-    //     $response = Http::get("https://api.bgm.tv/calendar")->object();
+Route::get('/database', function () {
+    $response = Http::get("https://api.bgm.tv/calendar")->object();
 
-    //     for($i = 0; $i<7; $i++) {
-    //         foreach ($response[$i]->items as $anime) {
-    //             $animeObject = new Anime();
-    //             $animeObject->anime_id = $anime->id;
-    //             $animeObject->name = $anime->name;
-    //             $animeObject->thumbnail_link = $anime->images ? $anime->images->small : null;
-    //             $animeObject->save();
-    //         }
-    //     }
-    // });
+    for($i = 0; $i<7; $i++) {
+        foreach ($response[$i]->items as $anime) {
+            $animeObject = new Anime();
+            $animeObject->anime_id = $anime->id;
+            $animeObject->name = $anime->name;
+            $animeObject->thumbnail_link = $anime->images ? $anime->images->small : null;
+            $animeObject->save();
+        }
+    }
+});
 
 Route::get('/register', [RegistrationController::class, 'index'])->name('registration.index');
 Route::post('/register', [RegistrationController::class, 'register'])->name('registration.create');
@@ -55,5 +55,5 @@ Route::post('/favorites/delete/{anime_id}', [FavoriteController::class, 'delete'
 
 Route::get('/comments/{anime_id}', [CommentController::class, 'show'])->name('comments');
 Route::post('/comments/{anime_id}', [CommentController::class, 'store'])->name('comments.store');
-Route::post('/comments/{comment_id}', [CommentController::class, 'update'])->name('comments.update');
+Route::post('/comments/{anime_id}/{comment_id}', [CommentController::class, 'update'])->name('comments.update');
 Route::post('/comments/delete/{comment_id}', [CommentController::class, 'delete'])->name('comments.delete');

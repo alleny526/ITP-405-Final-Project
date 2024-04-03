@@ -18,7 +18,7 @@ class CommentController extends Controller
         return view('comments', [
             'comments' => Comment::join('animes', 'comments.anime_id', '=', 'animes.anime_id')
                 ->orderBy('created_at', 'desc')
-                ->select('comments.*', 'animes.name', 'animes.anime_id')
+                ->select('comments.*', 'animes.name')
                 ->get(),
             'anime' => Anime::where('anime_id', '=', $anime_id)->first()
         ]);
@@ -45,13 +45,11 @@ class CommentController extends Controller
             ->with('success', "Successfully added {$comment->content}");
     }
 
-    public function update(Request $request, $comment_id)
+    public function update(Request $request, $anime_id, $comment_id)
     {
         $request->validate([
             'content' => 'required',
         ]);
-
-        dd($comment_id);
 
         $comment = Comment::where('id', '=', $comment_id)->first();
         $comment->content = $request->input('content');
@@ -59,18 +57,22 @@ class CommentController extends Controller
 
         return redirect()
             ->route('comments', [
-                'anime_id' => $comment->anime_id,
-                'anime' => Anime::where('anime_id', '=', $comment->anime_id)->first()
+                'anime_id' => $anime_id,
+                'anime' => Anime::where('anime_id', '=', $anime_id)->first()
                 ])
             ->with('success', "Successfully updated {$comment->content}");
     }
 
     public function delete($comment_id)
     {
-        $comment = Comment::where('id', '=', $comment_id)->first();
+        $anime_id = Comment::where('id', '=', $comment_id)->first()->anime_id;
+        $comment = Comment::where('id', '=', $comment_id)->first()->delete();
 
         return redirect()
-            ->route('comments', ['anime_id' => $comment->anime_id])
-            ->with('success', "Successfully deleted {$comment->content}");
+            ->route('comments', [
+                'anime_id' => $anime_id,
+                'anime' => Anime::where('anime_id', '=', $anime_id)->first()
+                ])
+            ->with('success', "Successfully deleted previous comment");
     }
 }
