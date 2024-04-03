@@ -1,9 +1,9 @@
 @extends('layout')
 
-@section('title', 'Daily Anime')
+@section('title', 'Favorites')
 
 @section('main')
-    <h1>Daily Anime List</h1>
+    <h1>Favorites</h1>
     <table className="table">
         <thead>
         <tr>

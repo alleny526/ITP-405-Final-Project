@@ -19,6 +19,7 @@
                             <th scope="col">Image</th>
                             <th scope="col">Name</th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -36,6 +37,18 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary">
                                                     Favorite
+                                                </button>
+                                            </form>
+                                        @else
+                                            Please log in or register.
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (Auth::check())
+                                            <form action="{{ route('comments', ['anime_id' => $anime->id]) }}" method="GET">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Comment
                                                 </button>
                                             </form>
                                         @else

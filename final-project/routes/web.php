@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\CommentController;
 
 use App\Models\Anime;
 
@@ -51,3 +52,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites');
 Route::post('/favorites/{anime_id}', [FavoriteController::class, 'store'])->name('favorites.store');
 Route::delete('/favorites/{anime_id}', [FavoriteController::class, 'delete'])->name('favorites.delete');
+
+Route::get('/comments/{anime_id}', [CommentController::class, 'show'])->name('comments');
+Route::post('/comments/{anime_id}', [CommentController::class, 'store'])->name('comments.store');
+Route::put('/comments/{comment_id}', [CommentController::class, 'store'])->name('comments.udpate');
+Route::delete('/comments/{comment_id}', [CommentController::class, 'delete'])->name('comments.delete');
