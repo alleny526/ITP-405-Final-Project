@@ -18,6 +18,7 @@ class CommentController extends Controller
         return view('comments', [
             'comments' => Comment::join('animes', 'comments.anime_id', '=', 'animes.anime_id')
                 ->orderBy('created_at', 'desc')
+                ->select('comments.*', 'animes.name', 'animes.anime_id')
                 ->get(),
             'anime' => Anime::where('anime_id', '=', $anime_id)->first()
         ]);
@@ -25,44 +26,51 @@ class CommentController extends Controller
 
     public function store(Request $request, $anime_id)
     {
+        $request->validate([
+            'content' => 'required',
+        ]);
+        
         $user_id = Auth::user()->id;
         $comment = new Comment();
         $comment->anime_id = $anime_id;
         $comment->user_id = $user_id;
-        $comment->content = $request->content;
+        $comment->content = $request->input('content');
         $comment->save();
 
         return redirect()
-            ->route('comments', ['anime_id' => $anime->id])
-            ->with('success', "Successfully added {$favorite->anime_id}");
+            ->route('comments', [
+                'anime_id' => $anime_id,
+                'anime' => Anime::where('anime_id', '=', $anime_id)->first()
+                ])
+            ->with('success', "Successfully added {$comment->content}");
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $comment_id)
     {
         $request->validate([
-            'title' => 'required|max:20',
-            'artist' => 'required|exists:artists,ArtistId',
+            'content' => 'required',
         ]);
 
-        $album = Album::where('AlbumId', '=', $id)->first();
-        $album->Title = $request->input('title');
-        $album->ArtistId = $request->input('artist');
-        $album->save();
+        dd($comment_id);
 
-        $artist = Artist::where('ArtistId', '=', $request->input('artist'))->first();
+        $comment = Comment::where('id', '=', $comment_id)->first();
+        $comment->content = $request->input('content');
+        $comment->save();        
 
         return redirect()
-            ->route('albums')
-            ->with('success', "Successfully updated {$request->input('title')} by {$artist->Name}");
+            ->route('comments', [
+                'anime_id' => $comment->anime_id,
+                'anime' => Anime::where('anime_id', '=', $comment->anime_id)->first()
+                ])
+            ->with('success', "Successfully updated {$comment->content}");
     }
 
-    public function delete($anime_id)
+    public function delete($comment_id)
     {
-        $user_id = Auth::user()->id;
-        $favorite = Favorite::where(['anime_id', '=', $anime_id], ['user_id', '=', $user_id])->delete();
+        $comment = Comment::where('id', '=', $comment_id)->first();
 
         return redirect()
-            ->route('favorites')
-            ->with('success', "Successfully deleted {$anime_id}");
+            ->route('comments', ['anime_id' => $comment->anime_id])
+            ->with('success', "Successfully deleted {$comment->content}");
     }
 }

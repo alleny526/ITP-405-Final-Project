@@ -4,14 +4,21 @@
 
 @section('main')
     <h1>{{$anime->name}} Comments</h1>
+    <form action="{{ route('comments.store', ['anime_id' => $anime->anime_id]) }}" method="POST">
+        @csrf
+        <textarea id="content" name="content"></textarea>
+        <button type="submit" class="btn btn-primary">
+            Comment
+        </button>
+    </form>
     <table className="table">
         <thead>
         <tr>
             <th scope="col">User name</th>
             <th scope="col">Content</th>
+            <th scope="col">Timestamp   </th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
-            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -27,21 +34,25 @@
                         {{$comment->created_at}}
                     </td>
                     <td>
-                        <form action="{{ route('favorites.delete', ['anime_id' => $anime->id]) }}" method="POST">
-                            @csrf
-                            <textarea></textarea>
-                            <button type="submit" class="btn btn-danger">
-                                Edit
-                            </button>
-                        </form>
+                        @if (Auth::user()->id == $comment->user_id)
+                            <form action="{{ route('comments.update', ['comment_id' => $comment->id]) }}" method="POST">
+                                @csrf
+                                <textarea id="content" name="content"></textarea>
+                                <button type="submit" class="btn btn-primary">
+                                    Edit
+                                </button>
+                            </form>
+                        @endif
                     </td>
                     <td>
-                        <form action="{{ route('favorites.delete', ['anime_id' => $anime->id]) }}" method="DELETE">
+                        @if (Auth::user()->id == $comment->user_id)
+                        <form action="{{ route('comments.delete', ['comment_id' => $comment->id]) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-danger">
                                 Delete
                             </button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

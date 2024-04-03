@@ -41,7 +41,7 @@ class FavoriteController extends Controller
     public function delete($anime_id)
     {
         $user_id = Auth::user()->id;
-        $favorite = Favorite::where(['anime_id', '=', $anime_id], ['user_id', '=', $user_id])->delete();
+        $favorite = Favorite::where([['anime_id', '=', $anime_id], ['user_id', '=', $user_id]])->delete();
 
         return redirect()
             ->route('favorites')

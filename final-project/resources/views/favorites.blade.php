@@ -27,7 +27,7 @@
                         {{$anime->created_at}}
                     </td>
                     <td>
-                        <form action="{{ route('favorites.delete', ['anime_id' => $anime->id]) }}" method="DELETE">
+                        <form action="{{ route('favorites.delete', ['anime_id' => $anime->anime_id]) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-danger">
                                 Delete
