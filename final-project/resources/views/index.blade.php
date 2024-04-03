@@ -31,7 +31,11 @@
                                         {{$anime->name}}
                                     </td>
                                     <td>
-                                        Bookmark
+                                        @if (Auth::check())
+                                            Favorite
+                                        @else
+                                            Please log in or register.
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

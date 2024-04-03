@@ -11,6 +11,22 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $primaryKey = 'id';
+
+    public function favorites()
+    {
+        // hasMany takes 2 additional args, the foreign key and local key (primary key)
+        // albums.ArtistId is the foregin key column
+        return $this->hasMany(Favorite::class, 'user_id', 'id');
+    }
+
+    public function comments()
+    {
+        // hasMany takes 2 additional args, the foreign key and local key (primary key)
+        // albums.ArtistId is the foregin key column
+        return $this->hasMany(Comment::class, 'user_id', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
