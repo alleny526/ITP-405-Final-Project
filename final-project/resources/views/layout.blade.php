@@ -15,6 +15,9 @@
             </li>
             @if (Auth::check())
                 <li class="nav-item">
+                    <p class="nav-link" style="color:black">Hi! {{ Auth::user()->name }}</p>
+                </li>
+                <li class="nav-item">
                     <a href="/favorites" class="nav-link">Favorites</a>
                 </li>
                 <li class="nav-item">

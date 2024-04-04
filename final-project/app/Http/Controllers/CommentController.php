@@ -17,6 +17,7 @@ class CommentController extends Controller
     {
         return view('comments', [
             'comments' => Comment::join('animes', 'comments.anime_id', '=', 'animes.anime_id')
+                ->where('comments.anime_id', '=', $anime_id)
                 ->orderBy('created_at', 'desc')
                 ->select('comments.*', 'animes.name')
                 ->get(),
@@ -31,6 +32,8 @@ class CommentController extends Controller
         ]);
         
         $user_id = Auth::user()->id;
+        $anime_name = Anime::where('anime_id', '=', $anime_id)->first()->name;
+        
         $comment = new Comment();
         $comment->anime_id = $anime_id;
         $comment->user_id = $user_id;
@@ -42,7 +45,7 @@ class CommentController extends Controller
                 'anime_id' => $anime_id,
                 'anime' => Anime::where('anime_id', '=', $anime_id)->first()
                 ])
-            ->with('success', "Successfully added {$comment->content}");
+            ->with('success', "Successfully added comment to {$anime_name}");
     }
 
     public function update(Request $request, $anime_id, $comment_id)
@@ -50,6 +53,8 @@ class CommentController extends Controller
         $request->validate([
             'content' => 'required',
         ]);
+        
+        $anime_name = Anime::where('anime_id', '=', $anime_id)->first()->name;
 
         $comment = Comment::where('id', '=', $comment_id)->first();
         $comment->content = $request->input('content');
@@ -60,12 +65,13 @@ class CommentController extends Controller
                 'anime_id' => $anime_id,
                 'anime' => Anime::where('anime_id', '=', $anime_id)->first()
                 ])
-            ->with('success', "Successfully updated {$comment->content}");
+            ->with('success', "Successfully updated comment to {$anime_name}");
     }
 
-    public function delete($comment_id)
+    public function delete($anime_id, $comment_id)
     {
-        $anime_id = Comment::where('id', '=', $comment_id)->first()->anime_id;
+        $anime_name = Anime::where('anime_id', '=', $anime_id)->first()->name;
+
         $comment = Comment::where('id', '=', $comment_id)->first()->delete();
 
         return redirect()
@@ -73,6 +79,6 @@ class CommentController extends Controller
                 'anime_id' => $anime_id,
                 'anime' => Anime::where('anime_id', '=', $anime_id)->first()
                 ])
-            ->with('success', "Successfully deleted previous comment");
+            ->with('success', "Successfully deleted comment to {$anime_name}");
     }
 }

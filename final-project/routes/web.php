@@ -58,5 +58,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/comments/{anime_id}', [CommentController::class, 'show'])->name('comments');
     Route::post('/comments/{anime_id}', [CommentController::class, 'store'])->name('comments.store');
     Route::post('/comments/{anime_id}/{comment_id}', [CommentController::class, 'update'])->name('comments.update');
-    Route::post('/comments/delete/{comment_id}', [CommentController::class, 'delete'])->name('comments.delete');
+    Route::post('/comments/delete/{anime_id}/{comment_id}', [CommentController::class, 'delete'])->name('comments.delete');
 });

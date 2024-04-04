@@ -29,7 +29,7 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
+                                        <a style="text-decoration:none" href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
                                         @if (Auth::check())
@@ -40,7 +40,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            Please log in or register.
+                                            Please log in or register to Favorite or Comment.
                                         @endif
                                     </td>
                                     <td>
@@ -70,7 +70,7 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <table className="table">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -96,7 +96,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            Please log in or register.
+                                            Please log in or register to Favorite or Comment.
                                         @endif
                                     </td>
                                     <td>
@@ -126,7 +126,7 @@
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <table className="table">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -152,7 +152,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            Please log in or register.
+                                            Please log in or register to Favorite or Comment.
                                         @endif
                                     </td>
                                     <td>
@@ -182,7 +182,7 @@
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <table className="table">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -208,7 +208,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            Please log in or register.
+                                            Please log in or register to Favorite or Comment.
                                         @endif
                                     </td>
                                     <td>
@@ -238,7 +238,7 @@
             </h2>
             <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <table className="table">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -264,7 +264,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            Please log in or register.
+                                            Please log in or register to Favorite or Comment.
                                         @endif
                                     </td>
                                     <td>
@@ -294,7 +294,7 @@
             </h2>
             <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <table className="table">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -320,7 +320,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            Please log in or register.
+                                            Please log in or register to Favorite or Comment.
                                         @endif
                                     </td>
                                     <td>
@@ -350,7 +350,7 @@
             </h2>
             <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <table className="table">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -376,7 +376,7 @@
                                                 </button>
                                             </form>
                                         @else
-                                            Please log in or register.
+                                            Please log in or register to Favorite or Comment.
                                         @endif
                                     </td>
                                     <td>
