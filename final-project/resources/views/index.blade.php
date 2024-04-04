@@ -13,7 +13,7 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <table className="table">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -29,7 +29,7 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        {{$anime->name}}
+                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
                                         @if (Auth::check())
@@ -52,7 +52,6 @@
                                                 </button>
                                             </form>
                                         @else
-                                            Please log in or register.
                                         @endif
                                     </td>
                                 </tr>
@@ -86,10 +85,30 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        {{$anime->name}}
+                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
-                                        Bookmark
+                                        @if (Auth::check())
+                                            <form action="{{ route('favorites.store', ['anime_id' => $anime->id]) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Favorite
+                                                </button>
+                                            </form>
+                                        @else
+                                            Please log in or register.
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (Auth::check())
+                                            <form action="{{ route('comments', ['anime_id' => $anime->id]) }}" method="GET">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Comment
+                                                </button>
+                                            </form>
+                                        @else
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -122,10 +141,30 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        {{$anime->name}}
+                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
-                                        Bookmark
+                                        @if (Auth::check())
+                                            <form action="{{ route('favorites.store', ['anime_id' => $anime->id]) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Favorite
+                                                </button>
+                                            </form>
+                                        @else
+                                            Please log in or register.
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (Auth::check())
+                                            <form action="{{ route('comments', ['anime_id' => $anime->id]) }}" method="GET">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Comment
+                                                </button>
+                                            </form>
+                                        @else
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -158,10 +197,30 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        {{$anime->name}}
+                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
-                                        Bookmark
+                                        @if (Auth::check())
+                                            <form action="{{ route('favorites.store', ['anime_id' => $anime->id]) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Favorite
+                                                </button>
+                                            </form>
+                                        @else
+                                            Please log in or register.
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (Auth::check())
+                                            <form action="{{ route('comments', ['anime_id' => $anime->id]) }}" method="GET">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Comment
+                                                </button>
+                                            </form>
+                                        @else
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -194,10 +253,30 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        {{$anime->name}}
+                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
-                                        Bookmark
+                                        @if (Auth::check())
+                                            <form action="{{ route('favorites.store', ['anime_id' => $anime->id]) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Favorite
+                                                </button>
+                                            </form>
+                                        @else
+                                            Please log in or register.
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (Auth::check())
+                                            <form action="{{ route('comments', ['anime_id' => $anime->id]) }}" method="GET">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Comment
+                                                </button>
+                                            </form>
+                                        @else
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -230,10 +309,30 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        {{$anime->name}}
+                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
-                                        Bookmark
+                                        @if (Auth::check())
+                                            <form action="{{ route('favorites.store', ['anime_id' => $anime->id]) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Favorite
+                                                </button>
+                                            </form>
+                                        @else
+                                            Please log in or register.
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (Auth::check())
+                                            <form action="{{ route('comments', ['anime_id' => $anime->id]) }}" method="GET">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Comment
+                                                </button>
+                                            </form>
+                                        @else
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -266,10 +365,30 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        {{$anime->name}}
+                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
-                                        Bookmark
+                                        @if (Auth::check())
+                                            <form action="{{ route('favorites.store', ['anime_id' => $anime->id]) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Favorite
+                                                </button>
+                                            </form>
+                                        @else
+                                            Please log in or register.
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (Auth::check())
+                                            <form action="{{ route('comments', ['anime_id' => $anime->id]) }}" method="GET">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">
+                                                    Comment
+                                                </button>
+                                            </form>
+                                        @else
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
