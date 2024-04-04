@@ -85,7 +85,7 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
+                                        <a style="text-decoration:none" href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
                                         @if (Auth::check())
@@ -141,7 +141,7 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
+                                        <a style="text-decoration:none" href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
                                         @if (Auth::check())
@@ -197,7 +197,7 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
+                                        <a style="text-decoration:none" href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
                                         @if (Auth::check())
@@ -253,7 +253,7 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
+                                        <a style="text-decoration:none" href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
                                         @if (Auth::check())
@@ -309,7 +309,7 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
+                                        <a style="text-decoration:none" href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
                                         @if (Auth::check())
@@ -365,7 +365,7 @@
                                         <img src={{$anime->images ? $anime->images->small : null}} alt={{$anime->name}}>
                                     </td>
                                     <td>
-                                        <a href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
+                                        <a style="text-decoration:none" href="/animes/{{ $anime->id }}">{{$anime->name}}</a>
                                     </td>
                                     <td>
                                         @if (Auth::check())

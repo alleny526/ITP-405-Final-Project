@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Comments')
+@section('title', "$anime->name Details")
 
 @section('main')
     <h1>{{$anime->name}}</h1>

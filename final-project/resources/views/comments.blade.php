@@ -20,55 +20,61 @@
             </button>
         </div>
     </form>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">User name</th>
-            <th scope="col">Content</th>
-            <th scope="col">Comment time</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-            @foreach ($comments as $comment)
-                <tr key={{$comment->id}}>
-                    <td>
-                        {{ Auth::user()->find($comment->user_id)->name }}
-                    </td>
-                    <td>
-                        {{$comment->content}}
-                    </td>
-                    <td>
-                        {{ date_format($comment->created_at, 'n/j/Y') }} at {{ date_format($comment->created_at, 'g:i A') }}
-                    </td>
-                    <td>
-                        @if (Auth::user()->id == $comment->user_id)
-                            <form class="row g-3" action="{{ route('comments.update', ['comment_id' => $comment->id, 'anime_id' => $anime->anime_id]) }}" method="POST">
+    @if (!Count($comments) == 0)
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">User name</th>
+                <th scope="col">Content</th>
+                <th scope="col">Comment time</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+                
+                @foreach ($comments as $comment)
+                    <tr key={{$comment->id}}>
+                        <td>
+                            {{ Auth::user()->find($comment->user_id)->name }}
+                        </td>
+                        <td>
+                            {{$comment->content}}
+                        </td>
+                        <td>
+                            {{ date_format($comment->created_at, 'n/j/Y') }} at {{ date_format($comment->created_at, 'g:i A') }}
+                        </td>
+                        <td>
+                            @if (Auth::user()->id == $comment->user_id)
+                                <form class="row g-3" action="{{ route('comments.update', ['comment_id' => $comment->id, 'anime_id' => $anime->anime_id]) }}" method="POST">
+                                    @csrf
+                                    <div class="col-auto">
+                                        <textarea class="form-control" id="content" name="content" placeholder="{{$comment->content}}"></textarea>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary">
+                                            Edit
+                                        </button>
+                                    </div>
+                                </form>
+                            @endif
+                        </td>
+                        <td>
+                            @if (Auth::user()->id == $comment->user_id)
+                            <form action="{{ route('comments.delete', ['comment_id' => $comment->id, 'anime_id' => $anime->anime_id]) }}" method="POST">
                                 @csrf
-                                <div class="col-auto">
-                                    <textarea class="form-control" id="content" name="content" placeholder="{{$comment->content}}"></textarea>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary">
-                                        Edit
-                                    </button>
-                                </div>
+                                <button type="submit" class="btn btn-danger">
+                                    Delete
+                                </button>
                             </form>
-                        @endif
-                    </td>
-                    <td>
-                        @if (Auth::user()->id == $comment->user_id)
-                        <form action="{{ route('comments.delete', ['comment_id' => $comment->id, 'anime_id' => $anime->anime_id]) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">
-                                Delete
-                            </button>
-                        </form>
-                        @endif
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <br>
+        <p>No comments yet! Add your first comment!</p>
+    @endif
 @endsection
