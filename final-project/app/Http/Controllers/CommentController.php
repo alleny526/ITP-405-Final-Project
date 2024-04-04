@@ -18,7 +18,7 @@ class CommentController extends Controller
         return view('comments', [
             'comments' => Comment::join('animes', 'comments.anime_id', '=', 'animes.anime_id')
                 ->where('comments.anime_id', '=', $anime_id)
-                ->orderBy('created_at', 'desc')
+                ->orderBy('updated_at', 'desc')
                 ->select('comments.*', 'animes.name')
                 ->get(),
             'anime' => Anime::where('anime_id', '=', $anime_id)->first()
